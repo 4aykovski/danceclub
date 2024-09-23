@@ -1,12 +1,204 @@
-﻿<Window x:Class="danceclub.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:danceclub"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+﻿<Window
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:av="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="av" x:Class="danceclub.MainWindow"
+    Title="MainWindow" Height="747" Width="1440" Background="#FF1C1E30" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" ResizeMode="CanMinimize" SizeToContent="WidthAndHeight">
+    <Window.Resources>
+        <Style x:Key="TabItemStyle1" TargetType="{x:Type TabItem}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TabItem}">
+                        <Border x:Name="Border" BorderThickness="0,0,0,2" CornerRadius="0,0,0,0"
+                        Padding="25,5,25,5" Margin="0,0,0,0" BorderBrush="White" Width="300">
+                            <ContentPresenter x:Name="ContentSite" ContentSource="Header" />
+                        </Border>
 
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="TextElement.Foreground" TargetName="ContentSite" Value="White"/>
+                                <Setter Property="HorizontalAlignment" TargetName="ContentSite" Value="Center"/>
+                                <Setter TargetName="Border" Property="Background" Value="#00000000"/>
+                                <Setter TargetName="Border" Property="Opacity" Value="1" />
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="False">
+                                <Setter Property="TextElement.Foreground" TargetName="ContentSite" Value="White"/>
+                                <Setter Property="HorizontalAlignment" TargetName="ContentSite" Value="Center"/>
+                                <Setter TargetName="Border" Property="Background" Value="#00000000" />
+                                <Setter TargetName="Border" Property="Opacity" Value="0.3" />
+
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid Width="1440" Height="744" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+
+        <TabControl Background="#FF1C1E30" RenderTransformOrigin="0.5,0.5" Margin="0,0,0,104" BorderBrush="Transparent">
+            <TabControl.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform Y="104"/>
+                </TransformGroup>
+            </TabControl.RenderTransform>
+            <TabItem x:Name="MainTab" Header="ГЛАВНАЯ" FontSize="24" Style="{DynamicResource TabItemStyle1}" RenderTransformOrigin="0.5,0.5" FontWeight="Bold">
+                <TabItem.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform X="270"/>
+                    </TransformGroup>
+                </TabItem.RenderTransform>
+                <Grid>
+                    <MediaElement Margin="100,10,100,30" OpacityMask="White" Source="/Енот Педро ,raccoon Pedro.mp4" Stretch="Fill" ScrubbingEnabled="True" Width="900" Height="506"/>
+                </Grid>
+
+            </TabItem>
+            <TabItem x:Name="HandbookTab" Header="СПРАВОЧНИКИ"  FontSize="24"  Style="{DynamicResource TabItemStyle1}" RenderTransformOrigin="0.5,0.5" FontWeight="Bold" >
+                <TabItem.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform X="270"/>
+                    </TransformGroup>
+                </TabItem.RenderTransform>
+                <Grid>
+                    <TextBox Text="Отчеты" Foreground="White" HorizontalAlignment="Left" Background="#FF0D0F21" BorderBrush="White" BorderThickness="0,0,0,2" FontWeight="Bold" FontSize="24" Height="64
+             " Width="240" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="134,54,0,457" AllowDrop="False" Focusable="False" IsEnabled="True" IsTabStop="False" IsHitTestVisible="False">
+                        <TextBox.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="20,20,0,0"/>
+                            </Style>
+                        </TextBox.Resources>
+                    </TextBox>
+                    <ListBox x:Name="HandbookList" Margin="132,117,1058,142" Background="#FF0D0F21" Foreground="White" ScrollViewer.HorizontalScrollBarVisibility="Hidden" Grid.IsSharedSizeScope="True" ScrollViewer.VerticalScrollBarVisibility="Hidden" BorderBrush="{x:Null}">
+                        <ListBox.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="0,0,20,20"/>
+                            </Style>
+                        </ListBox.Resources>
+
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Button Content="{Binding Path=Name}" Foreground="White" HorizontalAlignment="Center" Background="#FF0D0F21" BorderBrush="White" BorderThickness="0,0,0,2" FontWeight="Bold" FontSize="20" Height="60" Width="230" Uid="{Binding Path=Id}"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+
+                    </ListBox>
+                    <DataGrid x:Name="HandbookGrid" ColumnWidth="*" av:ItemsSource="{av:SampleData ItemCount=5}" Margin="398,54,136,113" Background="#FF0D0F21" Width="900" Height="408" Foreground="White" BorderBrush="#FF0D0F21" SelectionChanged="DataGrid_SelectionChanged" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalGridLinesBrush="White" VerticalGridLinesBrush="White" RowDetailsVisibilityMode="Visible" RowBackground="#FF0D0F21" HeadersVisibility="Column">
+                        <DataGrid.ColumnHeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="Background" Value="#FF0D0F21"></Setter>
+                                <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+                                <Setter Property="BorderBrush" Value="White"></Setter>
+                            </Style>
+                        </DataGrid.ColumnHeaderStyle>
+                        <DataGrid.CellStyle>
+                            <Style TargetType="DataGridCell">
+                                <Setter Property="Background" Value="#FF0D0F21"></Setter>
+
+
+                            </Style>
+                        </DataGrid.CellStyle>
+
+
+                    </DataGrid>
+
+                    <Button x:Name="HandbookExport" Content="ЭКСПОРТ" HorizontalAlignment="Left" Margin="1118,493,0,0" VerticalAlignment="Top" Width="180" Height="56" Click="Button_Click" Foreground="White" Background="#FF212340" BorderBrush="{x:Null}" FontSize="20">
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="30,30,30,30"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+                    <Button x:Name="HandbookLoad" Content="ЗАГРУЗИТЬ" HorizontalAlignment="Left" Margin="164,493,0,0" VerticalAlignment="Top" Width="180" Height="56" Click="Button_Click" Foreground="White" Background="#FF212340" BorderBrush="{x:Null}" FontSize="20">
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="30,30,30,30"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="ReportTab" Header="ОТЧЕТЫ"  FontSize="24" Style="{DynamicResource TabItemStyle1}" RenderTransformOrigin="0.5,0.5" FontWeight="Bold">
+                <TabItem.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform X="270"/>
+                    </TransformGroup>
+                </TabItem.RenderTransform>
+                <Grid>
+                    <TextBox Text="Отчеты" Foreground="White" HorizontalAlignment="Left" Background="#FF0D0F21" BorderBrush="White" BorderThickness="0,0,0,2" FontWeight="Bold" FontSize="24" Height="64
+                             " Width="240" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="134,54,0,457" AllowDrop="False" Focusable="False" IsHitTestVisible="False" IsTabStop="False" IsEnabled="True">
+                        <TextBox.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="20,20,0,0"/>
+                            </Style>
+                        </TextBox.Resources>
+                    </TextBox>
+                    <ListBox x:Name="ReportList" Margin="132,117,1058,142" Background="#FF0D0F21" Foreground="White" ScrollViewer.HorizontalScrollBarVisibility="Hidden" Grid.IsSharedSizeScope="True" ScrollViewer.VerticalScrollBarVisibility="Hidden" BorderBrush="{x:Null}">
+                        <ListBox.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="0,0,20,20"/>
+                            </Style>
+                        </ListBox.Resources>
+
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Button Content="{Binding Path=Name}" Foreground="White" HorizontalAlignment="Center" Background="#FF0D0F21" BorderBrush="White" BorderThickness="0,0,0,2" FontWeight="Bold" FontSize="20" Height="60" Width="230" Uid="{Binding Path=Id}"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+
+                    </ListBox>
+                    <DataGrid x:Name="ReportGrid" ColumnWidth="*" av:ItemsSource="{av:SampleData ItemCount=5}" Margin="398,54,136,113" Background="#FF0D0F21" Width="900" Height="408" Foreground="White" BorderBrush="#FF0D0F21" SelectionChanged="DataGrid_SelectionChanged" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalGridLinesBrush="White" VerticalGridLinesBrush="White" RowDetailsVisibilityMode="Visible" RowBackground="#FF0D0F21" HeadersVisibility="Column">
+                        <DataGrid.ColumnHeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="Background" Value="#FF0D0F21"></Setter>
+                                <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+                                <Setter Property="BorderBrush" Value="White"></Setter>
+                            </Style>
+                        </DataGrid.ColumnHeaderStyle>
+                        <DataGrid.CellStyle>
+                            <Style TargetType="DataGridCell">
+                                <Setter Property="Background" Value="#FF0D0F21"></Setter>
+
+
+                            </Style>
+                        </DataGrid.CellStyle>
+
+
+                    </DataGrid>
+                    <Button x:Name="ReportImport" Content="ИМПОРТ" HorizontalAlignment="Left" Margin="398,493,0,0" VerticalAlignment="Top" Width="180" Height="56" Click="Button_Click" Foreground="White" Background="#FF212340" BorderBrush="{x:Null}" FontSize="20">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="30,30,30,30"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+                    <Button x:Name="ReportExport" Content="ЭКСПОРТ" HorizontalAlignment="Left" Margin="614,493,0,0" VerticalAlignment="Top" Width="180" Height="56" Click="Button_Click" Foreground="White" Background="#FF212340" BorderBrush="{x:Null}" FontSize="20">
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="30,30,30,30"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+                    <Button x:Name="ReportSave" Content="СОХРАНИТЬ" HorizontalAlignment="Left" Margin="1118,493,0,0" VerticalAlignment="Top" Width="180" Height="56" Click="Button_Click" Foreground="White" Background="#FF212340" BorderBrush="{x:Null}" FontSize="20">
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="30,30,30,30"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+                </Grid>
+            </TabItem>
+
+        </TabControl>
     </Grid>
 </Window>
