@@ -21,7 +21,7 @@ public partial class App : Application
     protected override void OnStartup(StartupEventArgs e)
     {
         HandbookViewModel handbookViewModel = new HandbookViewModel(_context);
-        ReportViewModel reportViewModel = new ReportViewModel();
+        ReportViewModel reportViewModel = new ReportViewModel(_context);
 
         MainWindow = new MainWindow()
         {

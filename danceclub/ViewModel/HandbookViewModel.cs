@@ -15,7 +15,8 @@ namespace danceclub.ViewModel
     public class HandbookViewModel : ViewModelBase
     {
         private string _selectedHandbook;
-        public string SelectedHandbook {
+        public string SelectedHandbook 
+        {
             get { return _selectedHandbook; }
             set { _selectedHandbook = value; OnPropertyChanged(nameof(SelectedHandbook)); }
         }

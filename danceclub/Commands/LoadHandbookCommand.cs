@@ -40,11 +40,11 @@ namespace danceclub.Commands
 
             if (string.IsNullOrEmpty(selectedHandbook))
             {
-                MessageBox.Show("handbook don't selected", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("select handbook", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
-            ObservableCollection<Object> loadedReport = new ObservableCollection<Object>();
+            ObservableCollection<Object> loadedHandbook = new ObservableCollection<Object>();
 
             switch (selectedHandbook) {
                 case "Teacher":
@@ -54,7 +54,7 @@ namespace danceclub.Commands
                         foreach (Teacher reportItem in report)
                         {
                             TeacherViewModel teacherViewModel = new TeacherViewModel(reportItem);
-                            loadedReport.Add(teacherViewModel);
+                            loadedHandbook.Add(teacherViewModel);
                         }
 
                         break;
@@ -66,7 +66,7 @@ namespace danceclub.Commands
                         foreach (DanceType reportItem in report)
                         {
                             DanceTypeViewModel teacherViewModel = new DanceTypeViewModel(reportItem);
-                            loadedReport.Add(teacherViewModel);
+                            loadedHandbook.Add(teacherViewModel);
                         }
 
                         break;
@@ -78,7 +78,7 @@ namespace danceclub.Commands
                         foreach (GroupDanceType reportItem in report)
                         {
                             GroupDanceTypeViewModel teacherViewModel = new GroupDanceTypeViewModel(reportItem);
-                            loadedReport.Add(teacherViewModel);
+                            loadedHandbook.Add(teacherViewModel);
                         }
 
                         break;
@@ -90,7 +90,7 @@ namespace danceclub.Commands
                         foreach (Groups reportItem in report)
                         {
                             GroupsViewModel teacherViewModel = new GroupsViewModel(reportItem);
-                            loadedReport.Add(teacherViewModel);
+                            loadedHandbook.Add(teacherViewModel);
                         }
 
                         break;
@@ -102,7 +102,7 @@ namespace danceclub.Commands
                         foreach (GroupStudent reportItem in report)
                         {
                             GroupStudentViewModel teacherViewModel = new GroupStudentViewModel(reportItem);
-                            loadedReport.Add(teacherViewModel);
+                            loadedHandbook.Add(teacherViewModel);
                         }
 
                         break;
@@ -114,7 +114,7 @@ namespace danceclub.Commands
                         foreach (Schedule reportItem in report)
                         {
                             ScheduleViewModel teacherViewModel = new ScheduleViewModel(reportItem);
-                            loadedReport.Add(teacherViewModel);
+                            loadedHandbook.Add(teacherViewModel);
                         }
 
                         break;
@@ -126,7 +126,7 @@ namespace danceclub.Commands
                         foreach (Students reportItem in report)
                         {
                             StudentsViewModel teacherViewModel = new StudentsViewModel(reportItem);
-                            loadedReport.Add(teacherViewModel);
+                            loadedHandbook.Add(teacherViewModel);
                         }
 
                         break;
@@ -138,7 +138,7 @@ namespace danceclub.Commands
                         foreach (StudentSchedule reportItem in report)
                         {
                             StudentSchedulteViewModel teacherViewModel = new StudentSchedulteViewModel(reportItem);
-                            loadedReport.Add(teacherViewModel);
+                            loadedHandbook.Add(teacherViewModel);
                         }
 
                         break;
@@ -148,7 +148,7 @@ namespace danceclub.Commands
                     return;
             }
 
-            _handbookViewModel.DataGrid = loadedReport;
+            _handbookViewModel.DataGrid = loadedHandbook;
         }
     }
 }
