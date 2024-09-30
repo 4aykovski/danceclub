@@ -1,5 +1,5 @@
-﻿using Microsoft.Office.Interop.Excel;
-using NsExcel = Microsoft.Office.Interop.Excel.Application;
+﻿using ClosedXML.Excel;
+
 
 namespace Utils
 {
@@ -7,28 +7,30 @@ namespace Utils
     {
         public static void ListToExcel(List<Object> list)
         {
-            //start excel
-            var excapp = new NsExcel();
+            var workbook = new XLWorkbook();
+            workbook.AddWorksheet("sheetName");
+            var ws = workbook.Worksheet("sheetName");
 
-            //create a blank workbook
-            var workbook = excapp.Workbooks.Add();
-
-            //Not done yet. You have to work on a specific sheet - note the cast
-            //You may not have any sheets at all. Then you have to add one with NsExcel.Worksheet.Add()
-            var sheet = (Worksheet)workbook.Sheets[1]; //indexing starts from 1
-
-            //now the list
-            string cellName;
-            int counter = 1;
-            foreach (var item in list)
+            int column = 1;
+            foreach (var item in list[0].GetType().GetProperties())
             {
-                cellName = "A" + counter.ToString();
-                var range = sheet.get_Range(cellName, cellName);
-                range.Value2 = item.ToString();
-                ++counter;
+                ws.Cell(1, column).Value = item.Name.ToString();
+                column++;
             }
 
-            excapp.Visible = true;
+            int row = 2;
+            column = 1;
+            foreach (object item in list)
+            {
+                foreach (var field in item.GetType().GetProperties())
+                {
+                    ws.Cell(row, column).Value = field.GetValue(item, null)?.ToString();
+                    column++;
+                }
+                row++;
+            }
+
+            workbook.SaveAs($"./excels/{DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss-ffff")}.xlsx");
         }
     }
 }
