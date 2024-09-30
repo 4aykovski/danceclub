@@ -1,6 +1,7 @@
 ﻿using danceclub.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,9 +14,24 @@ namespace danceclub.Commands
     {
         private readonly ReportViewModel _reportViewModel;
 
+        private void OnViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(ReportViewModel.SelectedReport) ||  e.PropertyName == nameof(ReportViewModel.DataGrid))
+            {
+                OnCanExecuteChanged();
+            }
+        }
+
         public ExportReportCommand(ReportViewModel reportViewModel)
         {
             _reportViewModel = reportViewModel;
+
+            _reportViewModel.PropertyChanged += OnViewModelPropertyChanged;
+        }
+        public override bool CanExecute(object? parameter)
+        {
+            return !string.IsNullOrEmpty(_reportViewModel.SelectedReport) && _reportViewModel.DataGrid != null &&
+                base.CanExecute(parameter);
         }
 
         public override void Execute(object? parameter)

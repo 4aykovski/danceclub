@@ -1,5 +1,6 @@
 ﻿using danceclub.Commands;
 using danceclub.Models;
+using danceclub.Stores;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -54,10 +55,10 @@ namespace danceclub.ViewModel
         public ICommand SaveHandbookCommand { get; }
         public ICommand ExportHandbookCommand { get; }
 
-        public HandbookViewModel(DataContext context)
+        public HandbookViewModel(DataContext context, ModalNavigationStore modalNavigationStore)
         {
             LoadHandbookCommand = new LoadHandbookCommand(this, context);
-            SaveHandbookCommand = new SaveHandbookCommand();
+            SaveHandbookCommand = new OpenHandbookModalCommand(modalNavigationStore, this, context);
             ExportHandbookCommand = new ExportHandbookCommand(this);
         }
 
