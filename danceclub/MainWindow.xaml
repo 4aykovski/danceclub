@@ -58,7 +58,7 @@
                 </Grid>
 
             </TabItem>
-            <TabItem x:Name="HandbookTab" Header="СПРАВОЧНИКИ"  FontSize="24"  Style="{DynamicResource TabItemStyle1}" RenderTransformOrigin="0.5,0.5" FontWeight="Bold" >
+            <TabItem DataContext="{Binding ReportViewModel}" x:Name="HandbookTab" Header="ОТЧЕТЫ"  FontSize="24"  Style="{DynamicResource TabItemStyle1}" RenderTransformOrigin="0.5,0.5" FontWeight="Bold" >
                 <TabItem.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -68,29 +68,18 @@
                     </TransformGroup>
                 </TabItem.RenderTransform>
                 <Grid>
-                    <TextBox Text="Отчеты" Foreground="White" HorizontalAlignment="Left" Background="#FF0D0F21" BorderBrush="White" BorderThickness="0,0,0,2" FontWeight="Bold" FontSize="24" Height="64
-             " Width="240" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="134,54,0,457" AllowDrop="False" Focusable="False" IsEnabled="True" IsTabStop="False" IsHitTestVisible="False">
+                    <TextBox Text="Отчеты" Foreground="White" HorizontalAlignment="Left" Background="#FF0D0F21" BorderBrush="White" BorderThickness="0,0,0,2" FontWeight="Bold" FontSize="24" Width="240" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="134,61,0,478" AllowDrop="False" Focusable="False" IsEnabled="True" IsTabStop="False" IsHitTestVisible="False">
                         <TextBox.Resources>
                             <Style TargetType="Border">
                                 <Setter Property="CornerRadius" Value="20,20,0,0"/>
                             </Style>
                         </TextBox.Resources>
                     </TextBox>
-                    <ListBox x:Name="HandbookList" Margin="132,117,1058,142" Background="#FF0D0F21" Foreground="White" ScrollViewer.HorizontalScrollBarVisibility="Hidden" Grid.IsSharedSizeScope="True" ScrollViewer.VerticalScrollBarVisibility="Hidden" BorderBrush="{x:Null}">
-                        <ListBox.Resources>
-                            <Style TargetType="Border">
-                                <Setter Property="CornerRadius" Value="0,0,20,20"/>
-                            </Style>
-                        </ListBox.Resources>
+                    
+                    <ComboBox SelectedItem="{Binding SelectedReport}" ItemsSource="{Binding AllowedReports, UpdateSourceTrigger=PropertyChanged}" x:Name="reportComboBox" Text="Отчеты" Foreground="#FF0D0F21" HorizontalAlignment="Left" Background="#FF0D0F21" BorderBrush="#FF0D0F21" Width="240" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="134,110,0,431" />
 
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <Button Content="{Binding Path=Name}" Foreground="White" HorizontalAlignment="Center" Background="#FF0D0F21" BorderBrush="White" BorderThickness="0,0,0,2" FontWeight="Bold" FontSize="20" Height="60" Width="230" Uid="{Binding Path=Id}"/>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
 
-                    </ListBox>
-                    <DataGrid x:Name="HandbookGrid" ColumnWidth="*" av:ItemsSource="{av:SampleData ItemCount=5}" Margin="398,54,136,113" Background="#FF0D0F21" Width="900" Height="408" Foreground="White" BorderBrush="#FF0D0F21" SelectionChanged="DataGrid_SelectionChanged" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalGridLinesBrush="White" VerticalGridLinesBrush="White" RowDetailsVisibilityMode="Visible" RowBackground="#FF0D0F21" HeadersVisibility="Column">
+                    <DataGrid x:Name="HandbookGrid" ColumnWidth="*" ItemsSource="{Binding DataGrid}" Margin="398,54,136,113" Background="#FF0D0F21" Width="900" Height="408" Foreground="White" BorderBrush="#FF0D0F21" SelectionChanged="DataGrid_SelectionChanged" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalGridLinesBrush="White" VerticalGridLinesBrush="White" RowDetailsVisibilityMode="Visible" RowBackground="#FF0D0F21" HeadersVisibility="Column">
                         <DataGrid.ColumnHeaderStyle>
                             <Style TargetType="DataGridColumnHeader">
                                 <Setter Property="Background" Value="#FF0D0F21"></Setter>
@@ -101,22 +90,20 @@
                         <DataGrid.CellStyle>
                             <Style TargetType="DataGridCell">
                                 <Setter Property="Background" Value="#FF0D0F21"></Setter>
-
-
                             </Style>
                         </DataGrid.CellStyle>
 
 
                     </DataGrid>
 
-                    <Button x:Name="HandbookExport" Content="ЭКСПОРТ" HorizontalAlignment="Left" Margin="1118,493,0,0" VerticalAlignment="Top" Width="180" Height="56" Click="Button_Click" Foreground="White" Background="#FF212340" BorderBrush="{x:Null}" FontSize="20">
+                    <Button x:Name="HandbookExport" Command="{Binding ExportReportCommand}" Content="ЭКСПОРТ" HorizontalAlignment="Left" Margin="1118,493,0,0" VerticalAlignment="Top" Width="180" Height="56" Click="Button_Click" Foreground="White" Background="#FF212340" BorderBrush="{x:Null}" FontSize="20">
                         <Button.Resources>
                             <Style TargetType="{x:Type Border}">
                                 <Setter Property="CornerRadius" Value="30,30,30,30"/>
                             </Style>
                         </Button.Resources>
                     </Button>
-                    <Button x:Name="HandbookLoad" Content="ЗАГРУЗИТЬ" HorizontalAlignment="Left" Margin="164,493,0,0" VerticalAlignment="Top" Width="180" Height="56" Click="Button_Click" Foreground="White" Background="#FF212340" BorderBrush="{x:Null}" FontSize="20">
+                    <Button x:Name="HandbookLoad" Command="{Binding LoadReportCommand}" Content="ЗАГРУЗИТЬ" HorizontalAlignment="Left" Margin="164,493,0,0" VerticalAlignment="Top" Width="180" Height="56" Click="Button_Click" Foreground="White" Background="#FF212340" BorderBrush="{x:Null}" FontSize="20">
                         <Button.Resources>
                             <Style TargetType="{x:Type Border}">
                                 <Setter Property="CornerRadius" Value="30,30,30,30"/>
@@ -125,7 +112,7 @@
                     </Button>
                 </Grid>
             </TabItem>
-            <TabItem x:Name="ReportTab" Header="ОТЧЕТЫ"  FontSize="24" Style="{DynamicResource TabItemStyle1}" RenderTransformOrigin="0.5,0.5" FontWeight="Bold">
+            <TabItem DataContext="{Binding HandbookViewModel}" x:Name="ReportTab" Header="СПРАВОЧНИКИ"  FontSize="24" Style="{DynamicResource TabItemStyle1}" RenderTransformOrigin="0.5,0.5" FontWeight="Bold">
                 <TabItem.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -135,29 +122,22 @@
                     </TransformGroup>
                 </TabItem.RenderTransform>
                 <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="707*"/>
+                        <ColumnDefinition Width="727*"/>
+                    </Grid.ColumnDefinitions>
                     <TextBox Text="Отчеты" Foreground="White" HorizontalAlignment="Left" Background="#FF0D0F21" BorderBrush="White" BorderThickness="0,0,0,2" FontWeight="Bold" FontSize="24" Height="64
-                             " Width="240" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="134,54,0,457" AllowDrop="False" Focusable="False" IsHitTestVisible="False" IsTabStop="False" IsEnabled="True">
+                             " Width="240" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="134,61,0,463" AllowDrop="False" Focusable="False" IsHitTestVisible="False" IsTabStop="False" IsEnabled="True">
                         <TextBox.Resources>
                             <Style TargetType="Border">
                                 <Setter Property="CornerRadius" Value="20,20,0,0"/>
                             </Style>
                         </TextBox.Resources>
                     </TextBox>
-                    <ListBox x:Name="ReportList" Margin="132,117,1058,142" Background="#FF0D0F21" Foreground="White" ScrollViewer.HorizontalScrollBarVisibility="Hidden" Grid.IsSharedSizeScope="True" ScrollViewer.VerticalScrollBarVisibility="Hidden" BorderBrush="{x:Null}">
-                        <ListBox.Resources>
-                            <Style TargetType="Border">
-                                <Setter Property="CornerRadius" Value="0,0,20,20"/>
-                            </Style>
-                        </ListBox.Resources>
+                    
+                    <ComboBox SelectedItem="{Binding SelectedHandbook}" ItemsSource="{Binding AllowedHandbooks, UpdateSourceTrigger=PropertyChanged}"  x:Name="manualComboBox" Text="Справочники" Foreground="#FF0D0F21" HorizontalAlignment="Left" Background="#FF0D0F21" BorderBrush="#FF0D0F21" Width="240" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="134,110,0,431" />
 
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <Button Content="{Binding Path=Name}" Foreground="White" HorizontalAlignment="Center" Background="#FF0D0F21" BorderBrush="White" BorderThickness="0,0,0,2" FontWeight="Bold" FontSize="20" Height="60" Width="230" Uid="{Binding Path=Id}"/>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-
-                    </ListBox>
-                    <DataGrid x:Name="ReportGrid" ColumnWidth="*" av:ItemsSource="{av:SampleData ItemCount=5}" Margin="398,54,136,113" Background="#FF0D0F21" Width="900" Height="408" Foreground="White" BorderBrush="#FF0D0F21" SelectionChanged="DataGrid_SelectionChanged" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalGridLinesBrush="White" VerticalGridLinesBrush="White" RowDetailsVisibilityMode="Visible" RowBackground="#FF0D0F21" HeadersVisibility="Column">
+                    <DataGrid x:Name="ReportGrid" ColumnWidth="*" ItemsSource="{Binding DataGrid}" Margin="398,61,136,119" Background="#FF0D0F21" Width="900" Height="408" Foreground="White" BorderBrush="#FF0D0F21" SelectionChanged="DataGrid_SelectionChanged" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalGridLinesBrush="White" VerticalGridLinesBrush="White" RowDetailsVisibilityMode="Visible" RowBackground="#FF0D0F21" HeadersVisibility="Column" Grid.ColumnSpan="2">
                         <DataGrid.ColumnHeaderStyle>
                             <Style TargetType="DataGridColumnHeader">
                                 <Setter Property="Background" Value="#FF0D0F21"></Setter>
@@ -175,21 +155,21 @@
 
 
                     </DataGrid>
-                    <Button x:Name="ReportImport" Content="ИМПОРТ" HorizontalAlignment="Left" Margin="398,493,0,0" VerticalAlignment="Top" Width="180" Height="56" Click="Button_Click" Foreground="White" Background="#FF212340" BorderBrush="{x:Null}" FontSize="20">
+                    <Button x:Name="ReportImport" Command="{Binding LoadHandbookCommand}" Content="ИМПОРТ" HorizontalAlignment="Left" Margin="398,493,0,0" VerticalAlignment="Top" Width="180" Height="56" Click="Button_Click" Foreground="White" Background="#FF212340" BorderBrush="{x:Null}" FontSize="20">
                         <Button.Resources>
                             <Style TargetType="Border">
                                 <Setter Property="CornerRadius" Value="30,30,30,30"/>
                             </Style>
                         </Button.Resources>
                     </Button>
-                    <Button x:Name="ReportExport" Content="ЭКСПОРТ" HorizontalAlignment="Left" Margin="614,493,0,0" VerticalAlignment="Top" Width="180" Height="56" Click="Button_Click" Foreground="White" Background="#FF212340" BorderBrush="{x:Null}" FontSize="20">
+                    <Button x:Name="ReportExport" Command="{Binding ExportHandbookCommand}" Content="ЭКСПОРТ" HorizontalAlignment="Left" Margin="614,493,0,0" VerticalAlignment="Top" Width="180" Height="56" Click="Button_Click" Foreground="White" Background="#FF212340" BorderBrush="{x:Null}" FontSize="20" Grid.ColumnSpan="2">
                         <Button.Resources>
                             <Style TargetType="{x:Type Border}">
                                 <Setter Property="CornerRadius" Value="30,30,30,30"/>
                             </Style>
                         </Button.Resources>
                     </Button>
-                    <Button x:Name="ReportSave" Content="СОХРАНИТЬ" HorizontalAlignment="Left" Margin="1118,493,0,0" VerticalAlignment="Top" Width="180" Height="56" Click="Button_Click" Foreground="White" Background="#FF212340" BorderBrush="{x:Null}" FontSize="20">
+                    <Button x:Name="ReportSave" Command="{Binding SaveHandbookCommand}" Content="СОХРАНИТЬ" HorizontalAlignment="Left" Margin="411,493,0,0" VerticalAlignment="Top" Width="180" Height="56" Click="Button_Click" Foreground="White" Background="#FF212340" BorderBrush="{x:Null}" FontSize="20" Grid.Column="1">
                         <Button.Resources>
                             <Style TargetType="{x:Type Border}">
                                 <Setter Property="CornerRadius" Value="30,30,30,30"/>
