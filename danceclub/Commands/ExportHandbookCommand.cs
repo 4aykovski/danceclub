@@ -26,7 +26,7 @@ namespace danceclub.Commands
 
         public override bool CanExecute(object? parameter)
         {
-            return !string.IsNullOrEmpty(_handbookViewModel.SelectedHandbook) && _handbookViewModel.DataGrid != null &&
+            return !string.IsNullOrEmpty(_handbookViewModel.SelectedHandbook) && _handbookViewModel.DataGrid?.Count > 0 &&
                 base.CanExecute(parameter);
         }
 

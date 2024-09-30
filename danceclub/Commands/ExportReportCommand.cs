@@ -30,7 +30,7 @@ namespace danceclub.Commands
         }
         public override bool CanExecute(object? parameter)
         {
-            return !string.IsNullOrEmpty(_reportViewModel.SelectedReport) && _reportViewModel.DataGrid != null &&
+            return !string.IsNullOrEmpty(_reportViewModel.SelectedReport) && _reportViewModel.DataGrid?.Count > 0 &&
                 base.CanExecute(parameter);
         }
 

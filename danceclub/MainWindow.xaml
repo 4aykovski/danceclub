@@ -90,10 +90,36 @@
                 </TabItem.RenderTransform>
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="184*"/>
-                        <ColumnDefinition Width="55*"/>
+                        <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <MediaElement Margin="267,31,267,51" OpacityMask="White" Source="/Енот Педро ,raccoon Pedro.mp4" Stretch="Fill" ScrubbingEnabled="True" Width="900" Height="506" Grid.ColumnSpan="2"/>
+                    <StackPanel Background="#FF1C1E30">
+                        <MediaElement x:Name="Player" LoadedBehavior="Manual" Stretch="None" Height="510" Margin="20,0" Width="1080"/>
+                        <DockPanel Margin="100 20 100 0">
+                            <Button Name="OpenBtn" Click="OpenBtn_Click" Padding="5" Margin="0,0,10,0" Background="#f0f0f0">
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                    <Image Height="24" Width="24" Source="https://img.icons8.com/fluency/48/opened-folder.png"/>
+                                </StackPanel>
+                            </Button>
+                            <Button Name="PlayBtn" Click="PlayBtn_Click" Padding="5" Margin="0,0,10,0" Background="#f0f0f0">
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                    <Image Height="24" Width="24" Source="https://img.icons8.com/fluency/48/play.png"/>
+                                </StackPanel>
+                            </Button>
+                            <Button Name="PauseBtn" Click="PauseBtn_Click" Padding="5" Margin="0,0,10,0" Background="#f0f0f0">
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                    <Image Height="24" Width="24" Source="https://img.icons8.com/fluency/48/pause.png"/>
+                                </StackPanel>
+                            </Button>
+                            <Button Name="StopBtn" Click="StopBtn_Click" Padding="5" Margin="0,0,10,0" Background="#f0f0f0">
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                    <Image Height="24" Width="24" Source="https://img.icons8.com/fluency/48/stop.png"/>
+                                </StackPanel>
+                            </Button>
+                            <TextBlock Foreground="White" Name="StatusLbl" FontSize="14" VerticalAlignment="Center" Margin="10,0" MinWidth="60" TextAlignment="Center">00:00:00</TextBlock>
+                            <Slider Name="ProgressSlider" Maximum="1" Thumb.DragStarted="ProgressSlider_DragStarted" Thumb.DragCompleted="ProgressSlider_DragCompleted" ValueChanged="ProgressSlider_ValueChanged" VerticalAlignment="Center"/>
+                        </DockPanel>
+                    </StackPanel>
+
                 </Grid>
 
             </TabItem>
