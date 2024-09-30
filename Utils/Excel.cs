@@ -1,4 +1,5 @@
-﻿using NsExcel = Microsoft.Office.Interop.Excel;
+﻿using Microsoft.Office.Interop.Excel;
+using NsExcel = Microsoft.Office.Interop.Excel.Application;
 
 namespace Utils
 {
@@ -7,14 +8,14 @@ namespace Utils
         public static void ListToExcel(List<Object> list)
         {
             //start excel
-            NsExcel.ApplicationClass excapp = new Microsoft.Office.Interop.Excel.ApplicationClass();
+            var excapp = new NsExcel();
 
             //create a blank workbook
-            var workbook = excapp.Workbooks.Add(NsExcel.XlWBATemplate.xlWBATWorksheet);
+            var workbook = excapp.Workbooks.Add();
 
             //Not done yet. You have to work on a specific sheet - note the cast
             //You may not have any sheets at all. Then you have to add one with NsExcel.Worksheet.Add()
-            var sheet = (NsExcel.Worksheet)workbook.Sheets[1]; //indexing starts from 1
+            var sheet = (Worksheet)workbook.Sheets[1]; //indexing starts from 1
 
             //now the list
             string cellName;
