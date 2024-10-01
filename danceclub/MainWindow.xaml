@@ -191,7 +191,7 @@
                         <ColumnDefinition Width="707*"/>
                         <ColumnDefinition Width="727*"/>
                     </Grid.ColumnDefinitions>
-                    <TextBox Text="Отчеты" Foreground="White" HorizontalAlignment="Left" Background="#FF0D0F21" BorderBrush="White" BorderThickness="0,0,0,2" FontWeight="Bold" FontSize="24" Height="64
+                    <TextBox Text="Справочники" Foreground="White" HorizontalAlignment="Left" Background="#FF0D0F21" BorderBrush="White" BorderThickness="0,0,0,2" FontWeight="Bold" FontSize="24" Height="64
                              " Width="240" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="134,61,0,463" AllowDrop="False" Focusable="False" IsHitTestVisible="False" IsTabStop="False" IsEnabled="True">
                         <TextBox.Resources>
                             <Style TargetType="Border">
@@ -223,7 +223,7 @@
 
                     </DataGrid>
 
-                    <Button x:Name="ReportImport" Command="{Binding LoadHandbookCommand}" Content="ИМПОРТ" HorizontalAlignment="Left" Margin="398,493,0,0" VerticalAlignment="Top" Width="180" Height="56" Click="Button_Click" Foreground="White" Background="#FF212340" BorderBrush="{x:Null}" FontSize="20">
+                    <Button x:Name="ReportImport" Command="{Binding LoadHandbookCommand}" Content="ЗАГРУЗИТЬ" HorizontalAlignment="Left" Margin="398,493,0,0" VerticalAlignment="Top" Width="180" Height="56" Click="Button_Click" Foreground="White" Background="#FF212340" BorderBrush="{x:Null}" FontSize="20">
                         <Button.Resources>
                             <Style TargetType="Border">
                                 <Setter Property="CornerRadius" Value="30,30,30,30"/>
@@ -237,7 +237,7 @@
                             </Style>
                         </Button.Resources>
                     </Button>
-                    <Button x:Name="ReportSave" Command="{Binding SaveHandbookCommand}" Content="СОХРАНИТЬ" HorizontalAlignment="Left" Margin="411,493,0,0" VerticalAlignment="Top" Width="180" Height="56" Click="Button_Click" Foreground="White" Background="#FF212340" BorderBrush="{x:Null}" FontSize="20" Grid.Column="1">
+                    <Button x:Name="ReportSave" Command="{Binding SaveHandbookCommand}" Content="ДОБАВИТЬ" HorizontalAlignment="Left" Margin="411,493,0,0" VerticalAlignment="Top" Width="180" Height="56" Click="Button_Click" Foreground="White" Background="#FF212340" BorderBrush="{x:Null}" FontSize="20" Grid.Column="1">
                         <Button.Resources>
                             <Style TargetType="{x:Type Border}">
                                 <Setter Property="CornerRadius" Value="30,30,30,30"/>
